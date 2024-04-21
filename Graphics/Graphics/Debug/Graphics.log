@@ -1,0 +1,45 @@
+﻿  main.cpp
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(51,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(51,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(51,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(52,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(52,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(52,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(53,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(53,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(53,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(54,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(57,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(57,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(57,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(58,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(58,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(58,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(59,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(59,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(59,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(64,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(64,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(65,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(65,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(65,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(69,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(70,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(70,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(70,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(74,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(76,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(79,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(79,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(81,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(81,29): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(108,46): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(113,21): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(413,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(414,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(415,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(523,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(534,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(553,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Graphics\main.cpp(732,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Graphics.vcxproj -> C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\HW4\Graphics\Debug\Graphics.exe
