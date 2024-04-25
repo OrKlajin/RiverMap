@@ -3,11 +3,19 @@
 #include <time.h>
 #include <math.h>
 #include "glut.h"
+#include <vector>
+
+using namespace std;
 
 const double PI = 3.14;
-const int GSZ = 100;
+const int GSZ = 50;
 const int H = 600;
 const int W = 600;
+
+typedef struct {
+	int x;
+	int z;
+} POINT2D;
 
 // Texture definitions
 
@@ -15,6 +23,7 @@ const int TW = 512; // must be a power of 2
 const int TH = 512;
 
 double angle = 0;
+double modifier = 0;
 
 unsigned char tx0[TH][TW][3]; // RGB
 
@@ -41,36 +50,144 @@ double pitch = 0;
 
 
 double ground[GSZ][GSZ] = { 0 };
+double waterlevel[GSZ][GSZ] = { 0 };
+
 double tmp[GSZ][GSZ];
 const int num_rivers = 100;
+int num_drops = 0;
+bool isRiver[num_rivers];
 int xvalues[num_rivers];
 int zvalues[num_rivers];
 
 void UpdateGround();
 void Smooth();
 bool isAboveSand(double h);
+void createRiver(int i, int j, int numRiver);
 
 
 
-void setRiverStartingPoints(int i, int j) {
+void setRiverStartingPoints(int i, int j, int numRiver) {
 	
 
-	if (i < 5 || j < 5 || i > num_rivers - 5 || j > num_rivers - 5)
+	if (i < 5 || j < 5 || i > GSZ - 5 || j > GSZ - 5) {
+		isRiver[numRiver] = false;
 		return;
+	}
+		
 
-	if (isAboveSand(ground[i][j]) && isAboveSand(ground[i-2][j]) && isAboveSand(ground[i-2][j-2]) && isAboveSand(ground[i][j-2])) {
+	if (isAboveSand(ground[i][j]) && isAboveSand(ground[i-1][j]) && isAboveSand(ground[i-1][j-1]) && isAboveSand(ground[i][j-1])) {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glColor4d(0, 0.2, 0.5, 0.8);
 		glBegin(GL_POLYGON);
-		glVertex3d(j - GSZ / 2, ground[i][j], i - GSZ / 2);
-		glVertex3d(j - GSZ / 2, ground[i - 2][j], i - 1 - GSZ / 2);
-		glVertex3d(j - 1 - GSZ / 2, ground[i - 2][j - 2], i - 1 - GSZ / 2);
-		glVertex3d(j - 1 - GSZ / 2, ground[i][j - 2], i - GSZ / 2);
+		
+		glVertex3d(j - GSZ / 2, ground[i][j] + 0.001, i - GSZ / 2);	
+		glVertex3d(j - GSZ / 2, ground[i - 1][j] + 0.001, i - 1 - GSZ / 2);
+		glVertex3d(j - 1 - GSZ / 2, ground[i - 1][j - 1] + 0.001, i - 1 - GSZ / 2);
+		glVertex3d(j - 1 - GSZ / 2, ground[i][j - 1] + 0.001, i - GSZ / 2);
+
 		glEnd();
 		glDisable(GL_BLEND);
+
+		isRiver[numRiver] = true;
+		return;
 	}
 
+	isRiver[numRiver] = false;
+
+}
+
+void keepWaterLevel(int i, int j, int numRiver) {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glColor4d(0, 0.2, 0.5, 0.8);
+	glBegin(GL_POLYGON);
+
+	glVertex3d(j - GSZ / 2, waterlevel[i][j] + 0.001, i - GSZ / 2);
+	glVertex3d(j - GSZ / 2, waterlevel[i - 1][j] + 0.001, i - 1 - GSZ / 2);
+	glVertex3d(j - 1 - GSZ / 2, waterlevel[i - 1][j - 1] + 0.001, i - 1 - GSZ / 2);
+	glVertex3d(j - 1 - GSZ / 2, waterlevel[i][j - 1] + 0.001, i - GSZ / 2);
+
+	glEnd();
+	glDisable(GL_BLEND);
+}
+
+void modifyErrosion(int i, int j, int numRiver, double modifier) {
+	
+
+	if (isRiver[numRiver] == true) {
+		ground[i][j] -= modifier + 0.001;
+	}
+}
+
+// uses stack to uvercome the recursion
+void FloodFillIterative(int row, int col, int numRiver, double y)
+{
+	vector <POINT2D> myStack;
+	bool moved;
+
+	POINT2D current = { row,col };
+	myStack.push_back(current);
+
+	while (!myStack.empty())
+	{
+		moved = false;
+		current = myStack.back();
+		myStack.pop_back();
+		
+		row = current.x;  // save current point coordinates
+		col = current.z;
+		
+		setRiverStartingPoints(row, col, numRiver);
+		modifyErrosion(row, col, numRiver, modifier);
+		
+		
+		// try going up
+		if (ground[row + 1][col] < y)
+		{
+			current.x = row + 1;
+			current.z = col;
+			y = ground[current.x][current.z];
+			moved = true;
+		}
+		// try going down
+		if (ground[row - 1][col] < y)
+		{
+			current.x = row - 1;
+			current.z = col;
+			y = ground[current.x][current.z];
+			moved = true;
+		}
+		// try going right
+		if (ground[row][col + 1] < y)
+		{
+			current.x = row;
+			current.z = col + 1;
+			y = ground[current.x][current.z];
+			moved = true;
+		}
+		// try going left
+		if (ground[row][col - 1] < y)
+		{
+			current.x = row;
+			current.z = col - 1;
+			y = ground[current.x][current.z];
+			moved = true;
+		}
+		// if we moved, push the current point on the stack
+		if (moved)
+			myStack.push_back(current);
+		
+
+	}
+}
+
+void createRiver(int i, int j, int numRiver) {
+	double y = ground[i][j];
+
+	if (isRiver[numRiver] == true) {
+		FloodFillIterative(i, j, numRiver, y);	
+	}
 }
 
 void init()
@@ -81,7 +198,6 @@ void init()
 	glEnable(GL_DEPTH_TEST);
 
 	int i, j, randx, randz;
-	double dist;
 
 	srand(time(0));
 
@@ -99,6 +215,12 @@ void init()
 
 		xvalues[i] = randx;
 		zvalues[i] = randz;
+	}
+
+	for (i = 0; i < GSZ; i++) {
+		for (j = 0; j < GSZ; j++) {
+			waterlevel[i][j] = ground[i][j];
+		}
 	}
 	
 }
@@ -151,8 +273,8 @@ void Smooth()
 
 void SetColor(double h)
 {
-	/*h = fabs(h)/2;*/
-	h /= 6;
+	/*h = fabs(h)/6;*/
+	h /= 2;
 	// sand
 	if (h < 0.03)
 		glColor3d(0.8, 0.7, 0.5);
@@ -166,7 +288,8 @@ void SetColor(double h)
 }
 
 bool isAboveSand(double h) {
-	if (h >= 0.02)
+	/*h = fabs(h) / 6;*/
+	if (h >= 0.03)
 		return true;
 	return false;
 }
@@ -244,7 +367,10 @@ void display()
 
 	DrawFloor();
 	for (int i = 0; i < num_rivers; i++) {
-		setRiverStartingPoints(xvalues[i], zvalues[i]);
+		setRiverStartingPoints(xvalues[i], zvalues[i], i);
+	}
+	for (int i = 0; i < num_rivers; i++) {
+		createRiver(xvalues[i], zvalues[i], i);
 	}
 
 	glutSwapBuffers(); // show all
@@ -279,6 +405,16 @@ void idle()
 	eye.y += speed * sight_dir.y;
 	eye.z += speed * sight_dir.z;
 
+	if (num_drops < 10000)
+		num_drops++;
+	if (num_drops % 1000 == 0) {
+		if (modifier < 0.000001)
+			modifier += 0.0000001;
+		for (int i = 0; i < num_rivers; i++) {
+			/*modifyErrosion(xvalues[i], zvalues[i], i, modifier);*/
+		}
+	}
+	
 
 	glutPostRedisplay();
 }

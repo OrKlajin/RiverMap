@@ -1,10 +1,8 @@
 ﻿  main.cpp
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(79,19): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(86,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(84,9): warning C4101: 'dist': unreferenced local variable
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(83,9): warning C4101: 'j': unreferenced local variable
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(257,9): warning C4101: 'dist': unreferenced local variable
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(256,9): warning C4101: 'j': unreferenced local variable
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(256,6): warning C4101: 'i': unreferenced local variable
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(334,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(196,19): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(202,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(383,9): warning C4101: 'dist': unreferenced local variable
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(382,9): warning C4101: 'j': unreferenced local variable
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(382,6): warning C4101: 'i': unreferenced local variable
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Graphics\main.cpp(470,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
   Graphics.vcxproj -> C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\textures\Graphics\Debug\Graphics.exe
