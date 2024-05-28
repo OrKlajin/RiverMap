@@ -33,15 +33,15 @@ C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הו
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(83,27): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(85,25): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(85,29): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(278,20): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(284,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(448,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(460,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(472,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(484,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(533,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(545,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(557,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(569,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(1195,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(297,20): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(303,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(470,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(482,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(494,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(506,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(559,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(571,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(583,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(595,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(1234,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
   Graphics.vcxproj -> C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Debug\Graphics.exe

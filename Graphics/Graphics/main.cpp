@@ -147,7 +147,7 @@ void modifyErrosion(int i, int j, int numRiver, double modifier) {
 
 	if (isRiver[numRiver] == true && isErosionActive) {
 		ground[i][j] -= modifier + 0.001;
-		
+		riverWater[i][j] += modifier + 0.001;
 	}
 }
 
@@ -219,6 +219,25 @@ void createRiver(int i, int j, int numRiver) {
 	if (isRiver[numRiver] == true) {
 		FloodFillIterative(i, j, numRiver, y);
 	}
+}
+
+double findMaxOfNeighbors(int i, int j) {
+	double h = ground[i][j];
+	double h1 = fmax(ground[i][j], ground[i][j + 1]);
+	double h2 = fmax(ground[i][j], ground[i][j - 1]);
+	double h3 = fmax(ground[i][j], ground[i + 1][j]);
+	double h4 = fmax(ground[i][j], ground[i + 1][j]);
+
+	if (h1 > h)
+		h = h1;
+	if (h2 > h)
+		h = h2;
+	if (h3 > h)
+		h = h3;
+	if (h4 > h)
+		h = h4;
+
+	return h;
 }
 
 double findMinOfNeighbors(int i, int j) {
@@ -428,6 +447,9 @@ double dist(double x, double y) {
 
 int checkNearestRiver(int x, int z) {
 
+	if (riverWater[x][z] > 0)
+		return 0;
+
 	vector <POINT2D> myStack;
 	int index = x;
 	int oldx = x, oldz = z;
@@ -513,6 +535,10 @@ int checkNearestRiver(int x, int z) {
 }
 
 int checkNearestSea(int x, int z) {
+
+	if (waterlevel[x][z] == 0)
+		return 0;
+
 	vector <POINT2D> myStack;
 	int index = x;
 	int oldx = x, oldz = z;
@@ -681,7 +707,7 @@ bool isValidCitySpot(int row, int col) {
 }
 
 void drawWindows(int x, int z) {
-	double zlocation = 4.6 + z;
+	double zlocation = z - 2;
 	int middleWindow, middleFloor;
 	double xlocation, ylocation;
 	// material
@@ -729,10 +755,10 @@ void drawWindows(int x, int z) {
 			// right
 			glPushMatrix();
 			glTranslated(xlocation, 0, 0);
-			glutSolidCube(1);
-			glTranslated(0, -1, 0);
-			glutSolidCube(1);
-			glTranslated(0, 1, 0);
+			glutSolidCube(0.3);
+			glTranslated(0, -0.3, 0);
+			glutSolidCube(0.3);
+			glTranslated(0, 0.3, 0);
 			glPopMatrix();
 		}
 		glTranslated(0, 0, -2 * zlocation);
@@ -756,10 +782,10 @@ void drawWindows(int x, int z) {
 			// left
 			glPushMatrix();
 			glTranslated(xlocation, 0, 0);
-			glutSolidCube(1);
-			glTranslated(0, -1, 0);
-			glutSolidCube(1);
-			glTranslated(0, 1, 0);
+			glutSolidCube(0.3);
+			glTranslated(0, -0.3, 0);
+			glutSolidCube(0.3);
+			glTranslated(0, 0.3, 0);
 			glPopMatrix();
 		}
 		glTranslated(-zlocation, 0, zlocation);
@@ -783,10 +809,10 @@ void drawWindows(int x, int z) {
 			// front
 			glPushMatrix();
 			glTranslated(0, 0, xlocation);
-			glutSolidCube(1);
-			glTranslated(0, -1, 0);
-			glutSolidCube(1);
-			glTranslated(0, 1, 0);
+			glutSolidCube(0.3);
+			glTranslated(0, -0.3, 0);
+			glutSolidCube(0.3);
+			glTranslated(0, 0.3, 0);
 			glPopMatrix();
 		}
 		glTranslated(2 * zlocation, 0, 0);
@@ -810,10 +836,10 @@ void drawWindows(int x, int z) {
 			// back
 			glPushMatrix();
 			glTranslated(0, 0, xlocation);
-			glutSolidCube(1);
-			glTranslated(0, -1, 0);
-			glutSolidCube(1);
-			glTranslated(0, 1, 0);
+			glutSolidCube(0.3);
+			glTranslated(0, -0.3, 0);
+			glutSolidCube(0.3);
+			glTranslated(0,	0.3, 0);
 			glPopMatrix();
 		}
 
@@ -829,19 +855,19 @@ void drawCity(int i, int j) {
 	if (i < 5 || j < 5 || i > GSZ - 5 || j > GSZ - 5)
 		return;
 
-	// red spot for now to see where the city is placed
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glColor4d(1, 0, 0, 0.8);
-	glBegin(GL_POLYGON);
+	//// red spot for now to see where the city is placed
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glColor4d(1, 0, 0, 0.8);
+	//glBegin(GL_POLYGON);
 
-	glVertex3d(j - GSZ / 2, ground[i][j], i - GSZ / 2);
-	glVertex3d(j - GSZ / 2, ground[i][j], i - 1 - GSZ / 2);
-	glVertex3d(j - 1 - GSZ / 2, ground[i][j], i - 1 - GSZ / 2);
-	glVertex3d(j - 1 - GSZ / 2, ground[i][j], i - GSZ / 2);
+	//glVertex3d(j - GSZ / 2, ground[i][j], i - GSZ / 2);
+	//glVertex3d(j - GSZ / 2, ground[i][j], i - 1 - GSZ / 2);
+	//glVertex3d(j - 1 - GSZ / 2, ground[i][j], i - 1 - GSZ / 2);
+	//glVertex3d(j - 1 - GSZ / 2, ground[i][j], i - GSZ / 2);
 
-	glEnd();
-	glDisable(GL_BLEND);
+	//glEnd();
+	//glDisable(GL_BLEND);
 
 	// flatten ground first
 	double h = findMinOfNeighbors(i, j);
@@ -888,7 +914,7 @@ void drawCity(int i, int j) {
 	
 	// draw building cube with windows
 		glPushMatrix();
-		glTranslated(j - 1.5 - GSZ / 2, ground[i][j] + 0.5, i - 1.5 - GSZ / 2);
+		glTranslated(j - GSZ / 2, ground[i][j], i - GSZ / 2);
 		glRotated(45, 0, 1, 0);
 		glutSolidCube(0.8);
 		glTranslated(0, 0.6, 0);
@@ -903,12 +929,12 @@ void drawCity(int i, int j) {
 		glMaterialf(GL_FRONT, GL_SHININESS, 50);
 		// draw cone for roof
 		glPushMatrix();
-		glTranslated(j - 1.5 - GSZ / 2, ground[i][j] + 1.4, i - 1.5 - GSZ / 2);
+		glTranslated(j - GSZ / 2, ground[i][j] + 0.9, i - GSZ / 2);
 		glRotated(-90, 1, 0, 0);
 		glutSolidCone(0.8, 0.5, 4, 20);
 		glPopMatrix();
 
-		if (ground[i][j + 2 + dist] > 0 && ground[i][j + 2 + dist] <= ground[i][j] + 0.5) {
+		if (ground[i][j + dist] > 0 && checkNearestRiver(i, j + dist) > 0) {
 			// material
 			glMaterialfv(GL_FRONT, GL_AMBIENT, mt1amb);
 			glMaterialfv(GL_FRONT, GL_DIFFUSE, mt1diff);
@@ -916,7 +942,7 @@ void drawCity(int i, int j) {
 			glMaterialf(GL_FRONT, GL_SHININESS, 100);
 
 			glPushMatrix();
-			glTranslated(j - 1.5 - GSZ / 2 + dist, ground[i][j + dist] + 0.5, i - 1.5 - GSZ / 2);
+			glTranslated(j - GSZ / 2 + dist, findMaxOfNeighbors(i, j + dist), i - GSZ / 2);
 			glRotated(45, 0, 1, 0);
 			glutSolidCube(0.8);
 			glTranslated(0, 0.6, 0);
@@ -931,13 +957,13 @@ void drawCity(int i, int j) {
 			glMaterialf(GL_FRONT, GL_SHININESS, 50);
 			// draw cone for roof
 			glPushMatrix();
-			glTranslated(j - 1.5 - GSZ / 2 + dist, ground[i][j + dist] + 1.4, i - 1.5 - GSZ / 2);
+			glTranslated(j - GSZ / 2 + dist, findMaxOfNeighbors(i, j + dist) + 0.9, i - GSZ / 2);
 			glRotated(-90, 1, 0, 0);
 			glutSolidCone(0.8, 0.5, 4, 20);
 			glPopMatrix();
 		}
 		
-		if (ground[i][j + 2 - dist] > 0 && ground[i][j + 2 + dist] <= ground[i][j] + 0.5) {
+		if (ground[i][j - dist] > 0 && checkNearestRiver(i, j - dist) > 0) {
 			// material
 			glMaterialfv(GL_FRONT, GL_AMBIENT, mt1amb);
 			glMaterialfv(GL_FRONT, GL_DIFFUSE, mt1diff);
@@ -945,7 +971,7 @@ void drawCity(int i, int j) {
 			glMaterialf(GL_FRONT, GL_SHININESS, 100);
 
 			glPushMatrix();
-			glTranslated(j - 1.5 - GSZ / 2 - dist, ground[i][j - dist] + 0.5, i - 1.5 - GSZ / 2);
+			glTranslated(j - GSZ / 2 - dist, findMaxOfNeighbors(i, j - dist), i - GSZ / 2);
 			glRotated(45, 0, 1, 0);
 			glutSolidCube(0.8);
 			glTranslated(0, 0.6, 0);
@@ -960,13 +986,13 @@ void drawCity(int i, int j) {
 			glMaterialf(GL_FRONT, GL_SHININESS, 50);
 			// draw cone for roof
 			glPushMatrix();
-			glTranslated(j - 1.5 - GSZ / 2 - dist, ground[i][j - dist] + 1.4, i - 1.5 - GSZ / 2);
+			glTranslated(j - GSZ / 2 - dist, findMaxOfNeighbors(i, j - dist) + 0.9, i - GSZ / 2);
 			glRotated(-90, 1, 0, 0);
 			glutSolidCone(0.8, 0.5, 4, 20);
 			glPopMatrix();
 		}
 		
-		if (ground[i + 2 + dist][j] > 0 && ground[i][j + 2 + dist] <= ground[i][j] + 0.5) {
+		if (ground[i + dist][j] > 0 && checkNearestRiver(i + dist, j) > 0) {
 			// material
 			glMaterialfv(GL_FRONT, GL_AMBIENT, mt1amb);
 			glMaterialfv(GL_FRONT, GL_DIFFUSE, mt1diff);
@@ -974,7 +1000,7 @@ void drawCity(int i, int j) {
 			glMaterialf(GL_FRONT, GL_SHININESS, 100);
 
 			glPushMatrix();
-			glTranslated(j - 1.5 - GSZ / 2, ground[i + dist][j] + 0.5, i - 1.5 - GSZ / 2 + dist);
+			glTranslated(j - GSZ / 2, findMaxOfNeighbors(i + dist, j), i - GSZ / 2 + dist);
 			glRotated(45, 0, 1, 0);
 			glutSolidCube(0.8);
 			glTranslated(0, 0.6, 0);
@@ -989,13 +1015,13 @@ void drawCity(int i, int j) {
 			glMaterialf(GL_FRONT, GL_SHININESS, 50);
 			// draw cone for roof
 			glPushMatrix();
-			glTranslated(j - 1.5 - GSZ / 2, ground[i + dist][j] + 1.4, i - 1.5 - GSZ / 2 + dist);
+			glTranslated(j - GSZ / 2, findMaxOfNeighbors(i + dist, j) + 0.9, i - GSZ / 2 + dist);
 			glRotated(-90, 1, 0, 0);
 			glutSolidCone(0.8, 0.5, 4, 20);
 			glPopMatrix();
 		}
 
-		if (ground[i + 2 - dist][j] > 0 && ground[i][j + 2 + dist] <= ground[i][j] + 0.5) {
+		if (ground[i - dist][j] > 0 && checkNearestRiver(i - dist, j) > 0) {
 			// material
 			glMaterialfv(GL_FRONT, GL_AMBIENT, mt1amb);
 			glMaterialfv(GL_FRONT, GL_DIFFUSE, mt1diff);
@@ -1003,7 +1029,7 @@ void drawCity(int i, int j) {
 			glMaterialf(GL_FRONT, GL_SHININESS, 100);
 
 			glPushMatrix();
-			glTranslated(j - 1.5 - GSZ / 2, ground[i - dist][j] + 0.5, i - 1.5 - GSZ / 2 - dist);
+			glTranslated(j - GSZ / 2, findMaxOfNeighbors(i - dist, j), i - GSZ / 2 - dist);
 			glRotated(45, 0, 1, 0);
 			glutSolidCube(0.8);
 			glTranslated(0, 0.6, 0);
@@ -1018,7 +1044,7 @@ void drawCity(int i, int j) {
 			glMaterialf(GL_FRONT, GL_SHININESS, 50);
 			// draw cone for roof
 			glPushMatrix();
-			glTranslated(j - 1.5 - GSZ / 2, ground[i - dist][j] + 1.4, i - 1.5 - GSZ / 2 - dist);
+			glTranslated(j - GSZ / 2, findMaxOfNeighbors(i - dist, j) + 0.9, i - GSZ / 2 - dist);
 			glRotated(-90, 1, 0, 0);
 			glutSolidCone(0.8, 0.5, 4, 20);
 			glPopMatrix();
@@ -1027,24 +1053,37 @@ void drawCity(int i, int j) {
 	glDisable(GL_LIGHTING);
 }
 
+int checkSurroundings(int i, int j) {
+	int sum = 1;
+	if (ground[i + 2][j] > 0 && checkNearestRiver(i + 2, j) > 0)
+		sum++;
+	if (ground[i - 2][j] > 0 && checkNearestRiver(i - 2, j) > 0)
+		sum++;
+	if (ground[i][j + 2] > 0 && checkNearestRiver(i, j + 2) > 0)
+		sum++;
+	if (ground[i][j - 2] > 0 && checkNearestRiver(i, j - 2) > 0)
+		sum++;
+
+	return sum;
+}
+
 void getCoords(int* coords) {
+
+	int num = 0;
 
 	for (int i = 5; i < GSZ - 5; i++) {
 		for (int j = 5; j < GSZ - 5; j++) {
 			if (isValidCitySpot(i, j) == true) {
-				printf("City placed at %d %d\n", i, j);
-				coords[0] = i;
-				coords[1] = j;
-				return;
-				/*drawCity(i, j);
+				num = checkSurroundings(i, j);
+				if (num > 2) { // min buildings is at least 3
+					printf("City placed at %d %d\n", i, j);
+					coords[0] = i;
+					coords[1] = j;
+					return;
+				}
 
-				
-				placed = true;
-				break;*/
 			}		
 		}
-		/*if (placed)
-				break;*/
 	}
 }
 
