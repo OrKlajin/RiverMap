@@ -1,47 +1,43 @@
 ﻿  main.cpp
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(55,21): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(55,26): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(55,30): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(56,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(56,27): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(56,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(45,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(45,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(45,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(46,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(46,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(46,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(47,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(47,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(47,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(48,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(50,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(50,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(50,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(51,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(51,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(51,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(52,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(52,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(52,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(56,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(56,26): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(57,22): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(57,27): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(57,31): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(58,21): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(61,21): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(61,26): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(61,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(61,25): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(62,22): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(62,27): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(62,31): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(63,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(63,27): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(63,31): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(68,21): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(68,26): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(69,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(69,27): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(69,31): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(73,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(74,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(74,27): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(74,31): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(78,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(80,27): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(83,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(83,27): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(85,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(85,29): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(297,20): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(303,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(470,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(482,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(494,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(506,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(559,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(571,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(583,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(595,15): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(1234,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(273,20): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(279,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(469,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(483,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(497,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(511,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(564,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(578,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(592,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(606,16): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(905,9): warning C4101: 'j': unreferenced local variable
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(905,6): warning C4101: 'i': unreferenced local variable
+C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Graphics\main.cpp(984,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
   Graphics.vcxproj -> C:\Users\Fieldin\Documents\Afeka\ג\גרפיקה ממוחשבת\יחידת־הוראה 1\RiverErrosion\Graphics\Debug\Graphics.exe

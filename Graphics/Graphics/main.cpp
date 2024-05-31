@@ -8,9 +8,6 @@
 
 using namespace std;
 
-int num_floors = 2;
-int num_windows = 2;
-
 const double PI = 3.14;
 const int GSZ = 30;
 const int H = 600;
@@ -29,9 +26,6 @@ const int TH = 512;
 double angle = 0;
 double modifier = 0;
 
-unsigned char tx0[TH][TW][3]; // RGB
-
-
 typedef struct {
 	double x, y, z;
 } POINT3;
@@ -42,27 +36,21 @@ double sight_angle = PI;
 POINT3 sight_dir = { sin(sight_angle),0,cos(sight_angle) }; // in plane X-Z
 double speed = 0;
 double angular_speed = 0;
-
-// aircraft defs
-double air_sight_angle = PI;
-POINT3 air_sight_dir = { sin(air_sight_angle),0,cos(air_sight_angle) }; // in plane X-Z
 double air_speed = 0;
 double air_angular_speed = 0;
-POINT3 aircraft = { 0,15,0 };
-double pitch = 0;
+
+
 
 // lighting
 float lt1amb[4] = { 0.3 ,0.3,0.3, 0 };
 float lt1diff[4] = { 0.6 ,0.6,0.6, 0 };
 float lt1spec[4] = { 0.8 ,0.8,0.8, 0 };
-float lt1pos[4] = { 0.3, 0.5, 0.5, 0 }; // if the last parameter is 0 the lighting is directional 
-// if the last parameter is 1 the lighting is positional
+float lt1pos[4] = { 0.3, 0.5, 0.5, 0 }; 
 
 float lt2amb[4] = { 0.3 ,0.3,0.3, 0 };
 float lt2diff[4] = { 0.6 ,0.1,0.6, 0 };
 float lt2spec[4] = { 0.8 ,0.8,0.8, 0 };
-float lt2pos[4] = { -1 ,1,1, 0 }; // if the last parameter is 0 the lighting is directional 
-// if the last parameter is 1 thelighting is positional
+float lt2pos[4] = { -1 ,1,1, 0 }; 
 
 // yellow material
 float mt1amb[4] = { 0.7 ,0.7,0.5, 0 };
@@ -74,27 +62,15 @@ float mt2amb[4] = { 0,0,0.3,0 };
 float mt2diff[4] = { 0.3 ,0.6,0.4, 0 };
 float mt2spec[4] = { 1 ,1,1, 0 };
 
-// black material
-float mt3amb[4] = { 0,0,0.1,0 };
-float mt3diff[4] = { 0, 0 ,0 , 0 };
-float mt3spec[4] = { 0 ,0,0.1, 0 };
 
-// green material
-float mt4amb[4] = { 0,0.4,0.1,0 };
-float mt4diff[4] = { 0, 0 ,0 , 0 };
-float mt4spec[4] = { 0 ,0.2,0.1, 0 };
-
-
-
-double ground[GSZ][GSZ] = { 0 };
-double waterlevel[GSZ][GSZ] = { 0 };
-double riverWater[GSZ][GSZ] = { 0 };
+double ground[GSZ][GSZ] = { 0 }; // ground tile
+double waterlevel[GSZ][GSZ] = { 0 }; // start river tile
+double riverWater[GSZ][GSZ] = { 0 }; // river water height
 bool isErosionActive = true;
-double setHeight = 1;
+double setHeight = 0.6;
 
 double tmp[GSZ][GSZ];
-const int num_rivers = 30;
-int num_drops = 0;
+const int num_rivers = 30; // set number of rivers
 bool isRiver[num_rivers];
 int xvalues[num_rivers];
 int zvalues[num_rivers];
@@ -103,10 +79,11 @@ bool cityPlaced = false;
 
 void UpdateGround();
 void Smooth();
-bool isAboveSand(double h);
+bool isAboveSea(double h);
 void createRiver(int i, int j, int numRiver);
 void createRiverFill(int i, int j);
 void getCoords(int* coords);
+double findMinOfNeighbors(int i, int j);
 
 
 
@@ -119,7 +96,7 @@ void setRiverStartingPoints(int i, int j, int numRiver) {
 	}
 
 
-	if (isAboveSand(ground[i][j]) && isAboveSand(ground[i - 1][j]) && isAboveSand(ground[i - 1][j - 1]) && isAboveSand(ground[i][j - 1])) {
+	if (isAboveSea(ground[i][j]) && isAboveSea(ground[i - 1][j]) && isAboveSea(ground[i - 1][j - 1]) && isAboveSea(ground[i][j - 1])) {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glColor4d(0, 0.2, 0.5, 0.8);
@@ -147,7 +124,10 @@ void modifyErrosion(int i, int j, int numRiver, double modifier) {
 
 	if (isRiver[numRiver] == true && isErosionActive) {
 		ground[i][j] -= modifier + 0.001;
-		riverWater[i][j] += modifier + 0.001;
+		if (waterlevel[i][j] > 0)
+			waterlevel[i][j] -= modifier + 0.00001;
+		if (findMinOfNeighbors(i, j) != riverWater[i][j])
+				riverWater[i][j] += modifier + 0.000001;
 	}
 }
 
@@ -262,33 +242,29 @@ double findMinOfNeighbors(int i, int j) {
 void createRiverFill(int i, int j) {
 	double h = ground[i][j];
 
-	/*if (h > ground[i - 1][j] || h > ground[i][j - 1] || h > ground[i - 1][j - 1])
-		return;*/
-
-	if (setHeight < h) {
+	if (riverWater[i][j] > 0) {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glColor4d(0, 0.2, 0.5, 0.8);
 		glBegin(GL_POLYGON);
 		
-			glVertex3d(j - 1 - GSZ / 2, fmin(setHeight, waterlevel[i][j - 1]) + 0.2, i - GSZ / 2);
-			riverWater[i][j - 1] = fmin(setHeight, waterlevel[i][j - 1]) + 0.2;
-		
-		
-			glVertex3d(j - 1 - GSZ / 2, fmin(setHeight, waterlevel[i - 1][j - 1]) + 0.2, i - 1 - GSZ / 2);
-			riverWater[i - 1][j - 1] = fmin(setHeight, waterlevel[i - 1][j - 1]) + 0.2;
-		
-		
-			glVertex3d(j - GSZ / 2, fmin(setHeight, waterlevel[i - 1][j]) + 0.2, i - 1 - GSZ / 2);
-			riverWater[i - 1][j] = fmin(setHeight, waterlevel[i - 1][j]) + 0.2;
-		
-		
-			glVertex3d(j - GSZ / 2, fmin(setHeight, waterlevel[i][j]) + 0.2, i - GSZ / 2);
-			riverWater[i][j] = fmin(setHeight, waterlevel[i][j]) + 0.2;
+			glVertex3d(j - 1 - GSZ / 2, riverWater[i][j - 1], i - GSZ / 2);		
+			glVertex3d(j - 1 - GSZ / 2, riverWater[i - 1][j - 1], i - 1 - GSZ / 2);	
+			glVertex3d(j - GSZ / 2, riverWater[i - 1][j], i - 1 - GSZ / 2);	
+			glVertex3d(j - GSZ / 2, riverWater[i][j], i - GSZ / 2);
 		
 		glEnd();
 		glDisable(GL_BLEND);
 	}
+}
+
+void giveRiverValues(int i, int j) {
+	double h = ground[i][j];
+
+	if (setHeight < h)
+		riverWater[i][j] = fmin(setHeight, waterlevel[i][j]) + 0.2;
+	else
+		riverWater[i][j] = 0;
 }
 
 void init()
@@ -321,6 +297,12 @@ void init()
 	for (i = 0; i < GSZ; i++) {
 		for (j = 0; j < GSZ; j++) {
 			waterlevel[i][j] = ground[i][j];
+		}
+	}
+
+	for (i = 0; i < GSZ; i++) {
+		for (j = 0; j < GSZ; j++) {
+			giveRiverValues(i, j);
 		}
 	}
 		
@@ -374,7 +356,6 @@ void Smooth()
 
 void SetColor(double h)
 {
-	/*h = fabs(h)/6;*/
 	h /= 2;
 	// sand
 	if (h < 0.03)
@@ -388,9 +369,8 @@ void SetColor(double h)
 
 }
 
-bool isAboveSand(double h) {
-	/*h = fabs(h) / 6;*/
-	if (h >= 0.03)
+bool isAboveSea(double h) {
+	if (h > 0)
 		return true;
 	return false;
 }
@@ -441,8 +421,10 @@ void DrawFloor()
 }
 #pragma warning(pop)
 
-double dist(double x, double y) {
-	return sqrt((x - y) * (x - y));
+bool checked(int x, int z) {
+	if (riverWater[x][z] > 0)
+		return true;
+	return false;
 }
 
 int checkNearestRiver(int x, int z) {
@@ -456,6 +438,11 @@ int checkNearestRiver(int x, int z) {
 	POINT2D current = { x, z };
 	myStack.push_back(current);
 
+	bool checkedUp = false;
+	bool checkedDown = false;
+	bool checkedRight = false;
+	bool checkedLeft = false;
+
 	while (!myStack.empty())
 	{
 		current = myStack.back();
@@ -464,74 +451,77 @@ int checkNearestRiver(int x, int z) {
 		x = current.x;  // save current point coordinates
 		z = current.z;
 
+		if (x + 1 == GSZ)
+			checkedUp = true;
+		if (x - 1 < 0)
+			checkedDown = true;
+		if (z + 1 == GSZ)
+			checkedRight = true;
+		if (z - 1 < 0)
+			checkedLeft = true;
+
+		
+
 		// try going up
-		if (riverWater[x + 1][z] > 0)
-		{
-			return fabs((oldx + 1 - index) * GSZ);
-		}
-		else {
-			index++;
-			current.x = x + 1;
-			current.z = z;
-			myStack.push_back(current);
-			goto RiverLoop;
+		if (!checkedUp) {
+			if (riverWater[x + 1][z] > 0 && ground[x + 1][z] < setHeight)
+			{
+				return fabs((oldx + 1 - index) * GSZ);
+			}
+			else {
+				index++;
+				current.x = x + 1;
+				current.z = z;
+				myStack.push_back(current);
+				goto RiverLoop;
+			}
 		}
 		// try going down
-		if (riverWater[x - 1][z] > 0)
-		{
-			return fabs((oldx - 1 - index) * GSZ);
-		}
-		else {
-			index++;
-			current.x = x - 1;
-			current.z = z;
-			myStack.push_back(current);
-			goto RiverLoop;
-		}
+		if (!checkedDown) {
+			if (riverWater[x - 1][z] > 0 && ground[x - 1][z] < setHeight)
+			{
+				return fabs((oldx - 1 - index) * GSZ);
+			}
+			else {
+				index++;
+				current.x = x - 1;
+				current.z = z;
+				myStack.push_back(current);
+				goto RiverLoop;
+			}
+		}	
 		// try going right
-		if (riverWater[x][z + 1] > 0)
-		{
-			return fabs((oldx - index) * GSZ + oldz);
-		}
-		else {
-			index++;
-			current.x = x;
-			current.z = z + 1;
-			myStack.push_back(current);
-			goto RiverLoop;
+		if (!checkedRight) {
+			if (riverWater[x][z + 1] > 0 && ground[x][z + 1] < setHeight)
+			{
+				return fabs((oldx - index) * GSZ + oldz);
+			}
+			else {
+				index++;
+				current.x = x;
+				current.z = z + 1;
+				myStack.push_back(current);
+				goto RiverLoop;
+			}
 		}
 		// try going left
-		if (riverWater[x][z + 1] > 0)
-		{
-			return fabs((oldx - index) * GSZ - oldz);
-		}
-		else {
-			index++;
-			current.x = x;
-			current.z = z + 1;
-			myStack.push_back(current);
-			goto RiverLoop;
-		}
+		if (!checkedLeft) {
+			if (riverWater[x][z - 1] > 0 && ground[x][z - 1] < setHeight)
+			{
+				return fabs((oldx - index) * GSZ - oldz);
+			}
+			else {
+				index++;
+				current.x = x;
+				current.z = z + 1;
+				myStack.push_back(current);
+				goto RiverLoop;
+			}
+		}	
 	RiverLoop:;
 	}
 
 	return 0;
-
-
-	/*for (int i = x; i < GSZ; i++) {
-		for (int j = y; j < GSZ; j++) {
-			if (riverWater[i][j] > 0 || isRiver[j])
-				return (i - x) * GSZ + j;
-		}
-	}
-
-	for (int i = x; i >= 5; i--) {	
-		for (int j = y; j >= 5; j--) {
-			if (riverWater[i][j] > 0 || isRiver[j])
-				return (i - x) * GSZ + j;
-		}
-	}
-	return 0;*/
 }
 
 int checkNearestSea(int x, int z) {
@@ -545,6 +535,11 @@ int checkNearestSea(int x, int z) {
 	POINT2D current = { x, z };
 	myStack.push_back(current);
 
+	bool checkedUp = false;
+	bool checkedDown = false;
+	bool checkedRight = false;
+	bool checkedLeft = false;
+
 	while (!myStack.empty())
 	{
 		current = myStack.back();
@@ -553,321 +548,97 @@ int checkNearestSea(int x, int z) {
 		x = current.x;  // save current point coordinates
 		z = current.z;
 
+		if (x + 1 == GSZ)
+			checkedUp = true;
+		if (x - 1 < 0)
+			checkedDown = true;
+		if (z + 1 == GSZ)
+			checkedRight = true;
+		if (z - 1 < 0)
+			checkedLeft = true;
+
 		// try going up
-		if (waterlevel[x + 1][z] < 0.3)
-		{
-			return fabs((oldx + 1 - index) * GSZ);
-		}
-		else {
-			index++;
-			current.x = x + 1;
-			current.z = z;
-			myStack.push_back(current);
-			goto SeaLoop;
+		if (!checkedUp) {
+			if (waterlevel[x + 1][z] < 0.3)
+			{
+				return fabs((oldx + 1 - index) * GSZ);
+			}
+			else {
+				index++;
+				current.x = x + 1;
+				current.z = z;
+				myStack.push_back(current);
+				goto SeaLoop;
+			}
 		}
 		// try going down
-		if (waterlevel[x - 1][z] < 0.3)
-		{
-			return fabs((oldx - 1 - index) * GSZ);
-		}
-		else {
-			index++;
-			current.x = x - 1;
-			current.z = z;
-			myStack.push_back(current);
-			goto SeaLoop;
+		if (!checkedDown) {
+			if (waterlevel[x - 1][z] < 0.3)
+			{
+				return fabs((oldx - 1 - index) * GSZ);
+			}
+			else {
+				index++;
+				current.x = x - 1;
+				current.z = z;
+				myStack.push_back(current);
+				goto SeaLoop;
+			}
 		}
 		// try going right
-		if (waterlevel[x][z + 1] < 0.3)
-		{
-			return fabs((oldx - index) * GSZ + oldz);
-		}
-		else {
-			index++;
-			current.x = x;
-			current.z = z + 1;
-			myStack.push_back(current);
-			goto SeaLoop;
+		if (!checkedRight) {
+			if (waterlevel[x][z + 1] < 0.3)
+			{
+				return fabs((oldx - index) * GSZ + oldz);
+			}
+			else {
+				index++;
+				current.x = x;
+				current.z = z + 1;
+				myStack.push_back(current);
+				goto SeaLoop;
+			}
 		}
 		// try going left
-		if (waterlevel[x][z + 1] < 0.3)
-		{
-			return fabs((oldx - index) * GSZ - oldz);
-		}
-		else {
-			index++;
-			current.x = x;
-			current.z = z + 1;
-			myStack.push_back(current);
-			goto SeaLoop;
+		if (!checkedLeft) {
+			if (waterlevel[x][z - 1] < 0.3)
+			{
+				return fabs((oldx - index) * GSZ - oldz);
+			}
+			else {
+				index++;
+				current.x = x;
+				current.z = z + 1;
+				myStack.push_back(current);
+				goto SeaLoop;
+			}
 		}
 		SeaLoop:;
 	}
-
 	return 0;
-
-	/*for (int i = x; i < GSZ; i++) {
-		for (int j = y; j < GSZ; j++) {
-			if (riverWater[i][j] == 0)
-				return (i - x) * GSZ + j;
-		}
-	}
-	for (int i = x; i >= 5; i--) {
-		for (int j = y; j >= 5; j--) {
-			if (riverWater[i][j] == 0)
-				return (i - x) * GSZ + j;
-		}
-	}
-	return 0;*/
 }
 
 
 bool isValidCitySpot(int row, int col) {
 
-	vector <POINT2D> myStack;
-
-	POINT2D current = { row, col };
-	myStack.push_back(current);
-
-
 	if (ground[row][col] <= 0 && ground[row][col] <= setHeight) {
-		myStack.clear();
 		return false;
 	}
 
-	if (ground[row + 2][col + 2] <= 0 && ground[row + 2][col + 2] <= setHeight) {
-		myStack.clear();
-		return false;
-	}
-
-	if (ground[row - 2][col - 2] <= 0 && ground[row - 2][col - 2] <= setHeight) {
-		myStack.clear();
-		return false;
-	}
-
-	while (!myStack.empty())
+	if (setHeight > ground[row][col] && checkNearestRiver(row, col) > (GSZ * 3) && checkNearestSea(row, col) >= (GSZ * 2))
 	{
-		current = myStack.back();
-		myStack.pop_back();
-
-		if (current.x < 5 || current.z < 5 || current.x > GSZ - 5 || current.z > GSZ - 5)
-			goto EndLoop;
-
-		row = current.x;  // save current point coordinates
-		col = current.z;
-
-		// try going up
-		if (setHeight > ground[row + 1][col] && checkNearestRiver(row + 1, col) > (GSZ * 3) && checkNearestSea(row + 1, col) >= GSZ)
-		{
-			return true;
-		}
-		else {
-			current.x = row + 1;
-			current.z = col;
-			myStack.push_back(current);
-			// go to end of loop
-			goto EndLoop;
-		}
-		// try going down
-		if (setHeight > ground[row - 1][col] && checkNearestRiver(row - 1, col) > (GSZ * 3) && checkNearestSea(row - 1, col) >= GSZ)
-		{
-			return true;
-		}
-		else {
-			current.x = row - 1;
-			current.z = col;
-			myStack.push_back(current);
-			goto EndLoop;
-		}
-		// try going right
-		if (setHeight > ground[row][col + 1] && checkNearestRiver(row, col + 1) > (GSZ * 3) && checkNearestSea(row, col + 1) >= GSZ)
-		{
-			return true;
-		}
-		else {
-			current.x = row;
-			current.z = col + 1;
-			myStack.push_back(current);
-			goto EndLoop;
-		}
-		// try going left
-		if (setHeight > ground[row][col - 1] && checkNearestRiver(row, col - 1) > (GSZ * 3) && checkNearestSea(row, col - 1) >= GSZ)
-		{
-			return true;
-		}
-		else {
-			current.x = row;
-			current.z = col - 1;
-			myStack.push_back(current);
-			goto EndLoop;
-		}
-		EndLoop:; // end of loop
+		return true;
 	}
+
 	return false;
 }
 
-void drawWindows(int x, int z) {
-	double zlocation = z - 2;
-	int middleWindow, middleFloor;
-	double xlocation, ylocation;
-	// material
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mt3amb);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mt3diff);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mt3spec);
-	glMaterialf(GL_FRONT, GL_SHININESS, 0);
 
-	for (int j = 0; j < num_floors; j++) {
-		if (num_floors % 2 == 0) {
-			if (j % 2 == 0)
-				ylocation = -(j + 1);
-			else
-				ylocation = (j + 1);
-		}
-		else {
-			middleFloor = (num_floors / 2);
-			if (j == middleFloor)
-				ylocation = 0;
-			else if (j < middleFloor)
-				ylocation = -(j * middleFloor + 3);
-			else
-				ylocation = (j * 2 - middleFloor * 2 + 1);
-		}
-
-		glPushMatrix();
-		glTranslated(0, ylocation, zlocation);
-		for (int i = 0; i < num_windows; i++) {
-			if (num_windows % 2 == 0) {
-				if (i % 2 == 0)
-					xlocation = -(i + 0.5);
-				else
-					xlocation = (i + 0.5);
-			}
-			else {
-				middleWindow = (num_windows / 2);
-				if (i == middleWindow)
-					xlocation = 0;
-				else if (i < middleWindow)
-					xlocation = -(i * middleWindow + 2);
-				else
-					xlocation = (i * 2 - middleWindow * 2);
-			}
-
-			// right
-			glPushMatrix();
-			glTranslated(xlocation, 0, 0);
-			glutSolidCube(0.3);
-			glTranslated(0, -0.3, 0);
-			glutSolidCube(0.3);
-			glTranslated(0, 0.3, 0);
-			glPopMatrix();
-		}
-		glTranslated(0, 0, -2 * zlocation);
-
-		for (int i = 0; i < num_windows; i++) {
-			if (num_windows % 2 == 0) {
-				if (i % 2 == 0)
-					xlocation = -(i + 0.5);
-				else
-					xlocation = (i + 0.5);
-			}
-			else {
-				middleWindow = (num_windows / 2);
-				if (i == middleWindow)
-					xlocation = 0;
-				else if (i < middleWindow)
-					xlocation = -(i * middleWindow + 2);
-				else
-					xlocation = (i * 2 - middleWindow * 2);
-			}
-			// left
-			glPushMatrix();
-			glTranslated(xlocation, 0, 0);
-			glutSolidCube(0.3);
-			glTranslated(0, -0.3, 0);
-			glutSolidCube(0.3);
-			glTranslated(0, 0.3, 0);
-			glPopMatrix();
-		}
-		glTranslated(-zlocation, 0, zlocation);
-
-		for (int i = 0; i < num_windows; i++) {
-			if (num_windows % 2 == 0) {
-				if (i % 2 == 0)
-					xlocation = -(i + 0.5);
-				else
-					xlocation = (i + 0.5);
-			}
-			else {
-				middleWindow = (num_windows / 2);
-				if (i == middleWindow)
-					xlocation = 0;
-				else if (i < middleWindow)
-					xlocation = -(i * middleWindow + 2);
-				else
-					xlocation = (i * 2 - middleWindow * 2);
-			}
-			// front
-			glPushMatrix();
-			glTranslated(0, 0, xlocation);
-			glutSolidCube(0.3);
-			glTranslated(0, -0.3, 0);
-			glutSolidCube(0.3);
-			glTranslated(0, 0.3, 0);
-			glPopMatrix();
-		}
-		glTranslated(2 * zlocation, 0, 0);
-
-		for (int i = 0; i < num_windows; i++) {
-			if (num_windows % 2 == 0) {
-				if (i % 2 == 0)
-					xlocation = -(i + 0.5);
-				else
-					xlocation = (i + 0.5);
-			}
-			else {
-				middleWindow = (num_windows / 2);
-				if (i == middleWindow)
-					xlocation = 0;
-				else if (i < middleWindow)
-					xlocation = -(i * middleWindow + 2);
-				else
-					xlocation = (i * 2 - middleWindow * 2);
-			}
-			// back
-			glPushMatrix();
-			glTranslated(0, 0, xlocation);
-			glutSolidCube(0.3);
-			glTranslated(0, -0.3, 0);
-			glutSolidCube(0.3);
-			glTranslated(0,	0.3, 0);
-			glPopMatrix();
-		}
-
-		glPopMatrix();
-
-
-	}
-
-}
 
 void drawCity(int i, int j) {
 
 	if (i < 5 || j < 5 || i > GSZ - 5 || j > GSZ - 5)
 		return;
-
-	//// red spot for now to see where the city is placed
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glColor4d(1, 0, 0, 0.8);
-	//glBegin(GL_POLYGON);
-
-	//glVertex3d(j - GSZ / 2, ground[i][j], i - GSZ / 2);
-	//glVertex3d(j - GSZ / 2, ground[i][j], i - 1 - GSZ / 2);
-	//glVertex3d(j - 1 - GSZ / 2, ground[i][j], i - 1 - GSZ / 2);
-	//glVertex3d(j - 1 - GSZ / 2, ground[i][j], i - GSZ / 2);
-
-	//glEnd();
-	//glDisable(GL_BLEND);
 
 	// flatten ground first
 	double h = findMinOfNeighbors(i, j);
@@ -911,7 +682,6 @@ void drawCity(int i, int j) {
 	int dist = 2;
 
 	
-	
 	// draw building cube with windows
 		glPushMatrix();
 		glTranslated(j - GSZ / 2, ground[i][j], i - GSZ / 2);
@@ -919,7 +689,6 @@ void drawCity(int i, int j) {
 		glutSolidCube(0.8);
 		glTranslated(0, 0.6, 0);
 		glutSolidCube(0.8);
-		/*drawWindows(i , j); *///windows needs changing
 		glPopMatrix();
 
 		// material
@@ -947,7 +716,6 @@ void drawCity(int i, int j) {
 			glutSolidCube(0.8);
 			glTranslated(0, 0.6, 0);
 			glutSolidCube(0.8);
-			/*drawWindows(i , j); *///windows needs changing
 			glPopMatrix();
 
 			// material
@@ -976,7 +744,6 @@ void drawCity(int i, int j) {
 			glutSolidCube(0.8);
 			glTranslated(0, 0.6, 0);
 			glutSolidCube(0.8);
-			/*drawWindows(i , j); *///windows needs changing
 			glPopMatrix();
 
 			// material
@@ -1034,7 +801,6 @@ void drawCity(int i, int j) {
 			glutSolidCube(0.8);
 			glTranslated(0, 0.6, 0);
 			glutSolidCube(0.8);
-			/*drawWindows(i , j); *///windows needs changing
 			glPopMatrix();
 
 			// material
@@ -1139,16 +905,7 @@ void idle()
 	int i, j;
 	angle += 0.1;
 
-	// aircraft motion
-	air_sight_angle += air_angular_speed;
 
-	air_sight_dir.x = sin(air_sight_angle);
-	air_sight_dir.y = sin(-pitch);
-	air_sight_dir.z = cos(air_sight_angle);
-
-	aircraft.x += air_speed * air_sight_dir.x;
-	aircraft.y += air_speed * air_sight_dir.y;
-	aircraft.z += air_speed * air_sight_dir.z;
 
 	// ego-motion  or locomotion
 	sight_angle += angular_speed;
@@ -1161,15 +918,8 @@ void idle()
 	eye.y += speed * sight_dir.y;
 	eye.z += speed * sight_dir.z;
 
-	modifier += 0.0000001;
-
-	for (i = 0; i < GSZ; i++)
-		for (j = 0; j < GSZ; j++)
-		{
-			if (riverWater[i][j] > 0 && isErosionActive) {
-				riverWater[i][j] += modifier;
-			}
-		}
+	if (modifier < 1)
+		modifier += 0.00000000001;
 	
 
 	glutPostRedisplay();
